@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ==============================
+       PAGE TITLE & SEO
+       ============================== -->
+  <title>Design By RMJ — Bold Ideas, Elegant Designs</title>
+  <meta
+    name="description"
+    content="Design By RMJ creates bold, elegant logos, posters, social media graphics and advertising designs for brands and businesses."
+  />
+  <meta name="author" content="Design By RMJ" />
+  <meta name="theme-color" content="#0b1a3a" />
+
+  <!-- Open Graph (for sharing on WhatsApp / social previews) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Design By RMJ — Bold Ideas, Elegant Designs" />
+  <meta
+    property="og:description"
+    content="Logo, poster, social media and advertising design by Design By RMJ."
+  />
+  <meta property="og:image" content="B.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="B.png" />
+
+  <!-- ==============================
+       FONTS: Anton (headings) + Lora (body)
+       ============================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ==============================
+       STYLESHEET
+       ============================== -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Accessibility: skip link for keyboard users -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ==============================
+       HEADER / NAVIGATION
+       ============================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <!-- Brand name (text only — logo appears in hero) -->
+      <a class="brand" href="#home" aria-label="Design By RMJ — back to top">
+        <span class="brand-mark">RMJ</span>
+        <span class="brand-text">Design By RMJ</span>
+      </a>
+
+      <!-- Mobile menu toggle -->
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="siteNav"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <!-- Primary navigation -->
+      <nav class="site-nav" id="siteNav" aria-label="Primary">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="#home">Home</a></li>
+          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#works">Works</a></li>
+          <li><a class="nav-link" href="#reviews">Reviews</a></li>
+          <li><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ==============================
+       MAIN CONTENT
+       ============================== -->
+  <main id="main">
+
+    <!-- =========================================
+         1. HOME / HERO
+         ========================================= -->
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+
+        <!-- Logo inside a rounded white card (B.png has a white background) -->
+        <div class="logo-card">
+          <img
+            src="B.png"
+            alt="Design By RMJ logo"
+            class="logo-img"
+            width="320"
+            height="320"
+            fetchpriority="high"
+          />
+        </div>
+
+        <div class="hero-copy">
+          <p class="eyebrow">Creative Design Studio</p>
+
+          <h1 class="hero-title">
+            Bold ideas,<br />
+            <span class="accent">elegant designs.</span>
+          </h1>
+
+          <p class="hero-sub">
+            Logos, posters, social media graphics and advertising designs that
+            make your brand impossible to ignore.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#works">View Works</a>
+            <a
+              class="btn btn-whatsapp"
+              href="https://wa.me/2349135036337"
+              target="_blank"
+              rel="noopener"
+            >
+              Chat on WhatsApp
+            </a>
+          </div>
+
+          <ul class="hero-tags" aria-label="What I design">
+            <li>Logos</li>
+            <li>Posters</li>
+            <li>Social Media</li>
+            <li>Advertisements</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Decorative scroll hint -->
+      <p class="scroll-hint" aria-hidden="true">Scroll</p>
+    </section>
+
+    <!-- =========================================
+         2. ABOUT
+         ========================================= -->
+    <section class="about section" id="about">
+      <div class="container">
+
+        <header class="section-head">
+          <p class="eyebrow">About</p>
+          <h2 class="section-title">The mind behind Design By RMJ</h2>
+        </header>
+
+        <div class="about-grid">
+
+          <div class="about-copy">
+            <p>
+              Design By RMJ is a creative design studio built on one belief:
+              <strong>bold ideas deserve elegant execution.</strong> I help
+              brands, businesses and individuals stand out through logo design,
+              poster design, social media graphics and advertising visuals —
+              crafted with intention, not just made to fill space.
+            </p>
+
+            <p>
+              Every project starts with listening. Whether you’re launching
+              something new or refreshing how you’re seen, I turn your message
+              into visuals that feel confident, clean and unmistakably yours.
+            </p>
+
+            <p class="about-signature">
+              Bold ideas, elegant designs. That’s not just my slogan — it’s how
+              I work.
+            </p>
+          </div>
+
+          <aside class="about-services" aria-labelledby="servicesHeading">
+            <h3 class="services-title" id="servicesHeading">What I do</h3>
+
+            <ul class="services-list">
+              <li>
+                <span class="service-name">Logo Design</span>
+                <span class="service-desc">Marks and brand identities that stick.</span>
+              </li>
+              <li>
+                <span class="service-name">Poster Design</span>
+                <span class="service-desc">Print and digital posters that command attention.</span>
+              </li>
+              <li>
+                <span class="service-name">Social Media Design</span>
+                <span class="service-desc">Feed-ready graphics with a consistent look.</span>
+              </li>
+              <li>
+                <span class="service-name">Advertisement Design</span>
+                <span class="service-desc">Visuals built to sell, not just to look nice.</span>
+              </li>
+              <li>
+                <span class="service-name">And more</span>
+                <span class="service-desc">Ask about anything visual — I’ll tell you if I can help.</span>
+              </li>
+            </ul>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================
+         3. WORKS
+         ========================================= -->
+    <section class="works section" id="works">
+      <div class="container">
+
+        <header class="section-head">
+          <p class="eyebrow">Works</p>
+          <h2 class="section-title">Selected projects</h2>
+          <p class="section-sub">
+            A short look at recent design work — posters and brand visuals made
+            to be seen.
+          </p>
+        </header>
+
+        <div class="works-grid">
+
+          <!-- Work 1 -->
+          <figure class="work-card">
+            <div class="work-media">
+              <img
+                src="A.png"
+                alt="Catering services poster design by Design By RMJ"
+                class="work-img"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="work-caption">
+              <h3 class="work-title">Catering Services Poster</h3>
+              <p class="work-desc">Bold poster design for a catering brand.</p>
+            </figcaption>
+          </figure>
+
+          <!-- Work 2 -->
+          <figure class="work-card">
+            <div class="work-media">
+              <img
+                src="D.png"
+                alt="Tailoring services poster design by Design By RMJ"
+                class="work-img"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="work-caption">
+              <h3 class="work-title">Tailoring Services Poster</h3>
+              <p class="work-desc">Clean, sharp visuals for a tailoring service.</p>
+            </figcaption>
+          </figure>
+
+          <!-- Work 3 -->
+          <figure class="work-card">
+            <div class="work-media">
+              <img
+                src="E.png"
+                alt="Car dealing poster design by Design By RMJ"
+                class="work-img"
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="work-caption">
+              <h3 class="work-title">Car Dealing Poster</h3>
+              <p class="work-desc">A striking advert for a car dealership.</p>
+            </figcaption>
+          </figure>
+
+        </div>
+
+        <p class="works-cta">
+          Want something like this for your brand?
+          <a href="#contact">Let’s talk</a>.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- =========================================
+         4. REVIEWS
+         ========================================= -->
+    <section class="reviews section" id="reviews">
+      <div class="container">
+
+        <header class="section-head">
+          <p class="eyebrow">Reviews</p>
+          <h2 class="section-title">What clients say</h2>
+          <p class="section-sub">
+            Feedback from people who trusted me with their brand visuals.
+          </p>
+        </header>
+
+        <div class="reviews-grid">
+
+          <blockquote class="review-card">
+            <div class="review-mark" aria-hidden="true">“</div>
+            <p class="review-text">
+              Design By RMJ understood exactly what my catering business
+              needed. The poster looked premium, and I got messages about it
+              the same week.
+            </p>
+            <footer class="review-footer">
+              <span class="review-name">Catering client</span>
+              <span class="review-role">Poster design</span>
+            </footer>
+          </blockquote>
+
+          <blockquote class="review-card">
+            <div class="review-mark" aria-hidden="true">“</div>
+            <p class="review-text">
+              My tailoring brand finally looks as sharp as the clothes. Clean,
+              bold, and exactly on brand.
+            </p>
+            <footer class="review-footer">
+              <span class="review-name">Tailoring client</span>
+              <span class="review-role">Poster & social media design</span>
+            </footer>
+          </blockquote>
+
+          <blockquote class="review-card">
+            <div class="review-mark" aria-hidden="true">“</div>
+            <p class="review-text">
+              The car dealing poster was clear, striking and professional.
+              Fast turnaround and no stress.
+            </p>
+            <footer class="review-footer">
+              <span class="review-name">Car dealership client</span>
+              <span class="review-role">Advertisement design</span>
+            </footer>
+          </blockquote>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================
+         5. CONTACT
+         ========================================= -->
+    <section class="contact section" id="contact">
+      <div class="container contact-inner">
+
+        <header class="section-head contact-head">
+          <p class="eyebrow">Contact</p>
+          <h2 class="section-title">Let’s build something bold</h2>
+          <p class="section-sub">
+            Tell me what you need designed. WhatsApp is the fastest way to
+            reach me.
+          </p>
+        </header>
+
+        <ul class="contact-list">
+
+          <li class="contact-item">
+            <span class="contact-label">WhatsApp</span>
+            <a
+              class="contact-link"
+              href="https://wa.me/2349135036337"
+              target="_blank"
+              rel="noopener"
+            >
+              0913 503 6337
+            </a>
+          </li>
+
+          <li class="contact-item">
+            <span class="contact-label">Email</span>
+            <a class="contact-link" href="mailto:israeltemiloluwa0@gmail.com">
+              israeltemiloluwa0@gmail.com
+            </a>
+          </li>
+
+        </ul>
+
+        <!-- Contact button comes last -->
+        <div class="contact-action">
+          <a
+            class="btn btn-primary btn-lg"
+            href="https://wa.me/2349135036337"
+            target="_blank"
+            rel="noopener"
+          >
+            Start a Project
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================
+       FOOTER
+       ============================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <span class="footer-name">Design By RMJ</span>
+        <span class="footer-slogan">Bold ideas, elegant designs.</span>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer">
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#works">Works</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-contact">
+        <a href="https://wa.me/2349135036337" target="_blank" rel="noopener">
+          WhatsApp
+        </a>
+        <a href="mailto:israeltemiloluwa0@gmail.com">Email</a>
+      </div>
+
+      <p class="footer-copy">
+        &copy; <span id="year">2026</span> Design By RMJ. All rights reserved.
+      </p>
+
+    </div>
+  </footer>
+
+  <!-- ==============================
+       SCRIPT
+       ============================== -->
+  <script src="script.js" defer></script>
+</body>
+</html>

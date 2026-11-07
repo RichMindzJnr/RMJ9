@@ -1,0 +1,957 @@
+/* ============================================================
+   DESIGN BY RMJ — style.css
+   ============================================================
+   One-page portfolio stylesheet.
+   Mobile-first. Vanilla CSS. No frameworks. No build step.
+
+   ORDER OF THIS FILE
+   ------------------------------------------------------------
+     1.  Design tokens (CSS variables)
+     2.  Modern reset / base
+     3.  Typography defaults
+     4.  Utility classes + container
+     5.  Buttons
+     6.  Accessibility (skip link, focus rings)
+     7.  Header + brand
+     8.  Navigation (mobile-first + desktop)
+     9.  Hero / Home
+    10.  Section scaffolding
+    11.  About
+    12.  Works
+    13.  Reviews
+    14.  Contact
+    15.  Footer
+    16.  Motion preferences
+    17.  Print styles
+   ============================================================ */
+
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  /* ----- Brand colours ----- */
+  --navy:        #0b1a3a;
+  --navy-deep:   #071228;
+  --navy-soft:   #13264f;
+  --navy-line:   rgba(255, 255, 255, 0.12);
+
+  --neon-blue:   #00b3ff;
+  --neon-blue-2: #35d0ff;
+  --neon-glow:   rgba(0, 179, 255, 0.45);
+
+  --red:         #e63946;
+  --green:       #25d366;   /* WhatsApp green */
+  --green-dark:  #17a94f;
+
+  --white:       #ffffff;
+  --off-white:   #f6f8fc;
+  --ink:         #0e1526;
+  --ink-soft:    #46536b;
+  --ink-faint:   #7a8699;
+
+  /* ----- Fonts ----- */
+  --font-heading: "Anton", "Impact", "Arial Narrow", sans-serif;
+  --font-body:    "Lora", Georgia, "Times New Roman", serif;
+
+  /* ----- Spacing scale ----- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* ----- Radius + shadow ----- */
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   22px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 10px rgba(7, 18, 40, 0.08);
+  --shadow-md: 0 12px 34px rgba(7, 18, 40, 0.12);
+  --shadow-lg: 0 24px 60px rgba(7, 18, 40, 0.18);
+
+  /* ----- Layout ----- */
+  --container-max: 1140px;
+  --container-pad: 1.25rem;
+  --header-height: 64px;   /* JS keeps this in sync at runtime */
+
+  /* ----- Motion ----- */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --speed-fast: 0.18s;
+  --speed-med:  0.32s;
+  --speed-slow: 0.6s;
+}
+
+/* ============================================================
+   2. MODERN RESET / BASE
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Smooth in-page scrolling; JS also handles this with header offset */
+  scroll-behavior: smooth;
+  /* Prevent iOS font inflation */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Anchor offset so sticky header doesn't cover section titles */
+  scroll-padding-top: calc(var(--header-height) + 16px);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  font-weight: 400;
+
+  color: var(--ink);
+  background: var(--off-white);
+
+  /* Better text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  /* Avoid horizontal scroll from decorative bits */
+  overflow-x: hidden;
+}
+
+/* Prevent background scrolling when the mobile menu is open */
+body.nav-open {
+  overflow: hidden;
+}
+
+/* Media defaults */
+img,
+picture,
+svg,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+img {
+  height: auto;
+}
+
+/* Inherit fonts in form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Remove default list styling where we manage it ourselves */
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Paragraphs */
+p {
+  margin: 0 0 1rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* Links */
+a {
+  color: var(--neon-blue);
+  text-decoration: none;
+  transition: color var(--speed-fast) ease;
+}
+
+a:hover {
+  color: var(--navy);
+}
+
+/* Strong text reads as emphasis, not shouting */
+strong {
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* Blockquote reset */
+blockquote {
+  margin: 0;
+}
+
+/* ============================================================
+   3. TYPOGRAPHY DEFAULTS
+   ============================================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;          /* Anton is already heavy */
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+  margin: 0 0 var(--space-4);
+  color: var(--navy);
+  text-transform: uppercase;
+}
+
+h1 { font-size: clamp(2.4rem, 9vw, 5rem); }
+h2 { font-size: clamp(1.7rem, 5.5vw, 2.9rem); }
+h3 { font-size: clamp(1.15rem, 3.2vw, 1.5rem); }
+h4 { font-size: clamp(1rem, 2.6vw, 1.2rem); }
+
+/* Slogan-ish eyebrow label */
+.eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--neon-blue);
+  margin: 0 0 var(--space-3);
+  display: inline-block;
+}
+
+/* ============================================================
+   4. UTILITIES + CONTAINER
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* Visually hidden but readable by screen readers */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Section wrapper spacing */
+.section {
+  padding-block: var(--space-8);
+  position: relative;
+}
+
+/* ============================================================
+   5. BUTTONS
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 0.85rem 1.6rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  line-height: 1;
+
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+
+  transition:
+    transform var(--speed-fast) var(--ease-out),
+    background-color var(--speed-fast) ease,
+    border-color var(--speed-fast) ease,
+    color var(--speed-fast) ease,
+    box-shadow var(--speed-fast) ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Focus ring shared by all buttons */
+.btn:focus-visible {
+  outline: 3px solid var(--neon-blue);
+  outline-offset: 3px;
+}
+
+/* ----- Primary: neon blue on navy ----- */
+.btn-primary {
+  background: var(--neon-blue);
+  color: var(--navy-deep);
+  box-shadow: 0 8px 24px rgba(0, 179, 255, 0.35);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--white);
+  color: var(--navy-deep);
+  box-shadow: 0 10px 30px rgba(0, 179, 255, 0.5);
+}
+
+/* ----- WhatsApp: green ----- */
+.btn-whatsapp {
+  background: var(--green);
+  color: var(--white);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.32);
+}
+
+.btn-whatsapp:hover,
+.btn-whatsapp:focus-visible {
+  background: var(--green-dark);
+  color: var(--white);
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.45);
+}
+
+/* ----- Large variant (contact CTA) ----- */
+.btn-lg {
+  padding: 1.05rem 2.4rem;
+  font-size: 0.95rem;
+}
+
+/* ============================================================
+   6. ACCESSIBILITY — SKIP LINK + FOCUS RINGS
+   ============================================================ */
+
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: -100px;
+  transform: translateX(-50%);
+  z-index: 10000;
+
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+
+  background: var(--navy-deep);
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+
+  transition: top var(--speed-fast) ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  color: var(--neon-blue);
+  outline: 2px solid var(--neon-blue);
+  outline-offset: 2px;
+}
+
+/* Consistent visible focus for keyboard users */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--neon-blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Sections receiving programmatic focus shouldn't show a ring */
+section:focus,
+section:focus-visible {
+  outline: none;
+}
+
+/* ============================================================
+   7. HEADER + BRAND
+   ============================================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: rgba(7, 18, 40, 0.92);
+  border-bottom: 1px solid var(--navy-line);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:
+    box-shadow var(--speed-med) ease,
+    background-color var(--speed-med) ease;
+}
+
+/* JS adds .is-scrolled once you scroll */
+.site-header.is-scrolled {
+  background: rgba(7, 18, 40, 0.98);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: var(--header-height);
+  padding-block: 0.6rem;
+}
+
+/* ----- Brand lockup ----- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--white);
+  font-family: var(--font-heading);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.brand:hover {
+  color: var(--white);
+}
+
+.brand-mark {
+  display: inline-grid;
+  place-items: center;
+
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, var(--neon-blue), var(--navy-soft));
+  color: var(--navy-deep);
+
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14),
+              0 6px 18px rgba(0, 179, 255, 0.35);
+}
+
+.brand-text {
+  font-size: 0.85rem;
+  letter-spacing: 1.2px;
+}
+
+/* ============================================================
+   8. NAVIGATION
+   ============================================================ */
+
+/* ----- Mobile toggle (hamburger) ----- */
+.nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  width: 44px;
+  height: 44px;
+  padding: 0;
+
+  background: transparent;
+  border: 1px solid var(--navy-line);
+  border-radius: 12px;
+  cursor: pointer;
+
+  transition:
+    background-color var(--speed-fast) ease,
+    border-color var(--speed-fast) ease;
+}
+
+.nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--white);
+
+  transition:
+    transform var(--speed-med) var(--ease-out),
+    opacity var(--speed-fast) ease;
+}
+
+/* Animate the hamburger into an X when open */
+.nav-toggle.is-open .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.is-open .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.4);
+}
+
+.nav-toggle.is-open .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ----- Mobile nav panel ----- */
+.site-nav {
+  position: fixed;
+  top: calc(var(--header-height) + 4px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  margin: 0;
+  padding: var(--space-6) var(--container-pad) var(--space-8);
+
+  background: var(--navy-deep);
+  border-top: 1px solid var(--navy-line);
+
+  overflow-y: auto;
+
+  /* Hidden by default on mobile */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+
+  transition:
+    opacity var(--speed-med) ease,
+    transform var(--speed-med) var(--ease-out),
+    visibility var(--speed-med) ease;
+}
+
+/* JS toggles .is-open on the nav */
+.site-nav.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.9rem 0.5rem;
+
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.82);
+  border-bottom: 1px solid var(--navy-line);
+
+  transition: color var(--speed-fast) ease, padding-left var(--speed-fast) ease;
+}
+
+.nav-link:hover {
+  color: var(--neon-blue);
+  padding-left: 0.9rem;
+}
+
+/* JS scroll-spy sets .is-active */
+.nav-link.is-active {
+  color: var(--neon-blue);
+}
+
+.nav-link.is-active::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 0.6rem;
+  border-radius: 50%;
+  background: var(--neon-blue);
+  vertical-align: middle;
+  box-shadow: 0 0 12px var(--neon-glow);
+}
+
+/* ============================================================
+   9. HERO / HOME
+   ============================================================ */
+
+.hero {
+  position: relative;
+  padding-block: var(--space-7) var(--space-8);
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at 15% 10%, rgba(0, 179, 255, 0.22), transparent 55%),
+    radial-gradient(circle at 85% 20%, rgba(230, 57, 70, 0.14), transparent 55%),
+    linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 65%, var(--navy-soft) 100%);
+
+  color: var(--white);
+}
+
+/* Soft decorative glow bottom-left */
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: -160px;
+  left: -120px;
+
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+
+  background: radial-gradient(circle, rgba(0, 179, 255, 0.28), transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+/* ----- Logo in a white rounded card ----- */
+.logo-card {
+  justify-self: center;
+  display: grid;
+  place-items: center;
+
+  width: min(74vw, 300px);
+  aspect-ratio: 1 / 1;
+  padding: var(--space-5);
+
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.35),
+    0 0 0 8px rgba(255, 255, 255, 0.06),
+    0 0 40px rgba(0, 179, 255, 0.18);
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ----- Hero copy ----- */
+.hero-copy {
+  text-align: center;
+}
+
+.hero-title {
+  color: var(--white);
+  margin-bottom: var(--space-4);
+  font-size: clamp(2.3rem, 10vw, 4.6rem);
+  line-height: 1;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.28);
+}
+
+/* Neon-accented second line */
+.hero-title .accent {
+  display: inline-block;
+  color: var(--neon-blue);
+  text-shadow: 0 0 24px var(--neon-glow);
+}
+
+.hero-sub {
+  max-width: 46ch;
+  margin-inline: auto;
+  margin-bottom: var(--space-5);
+
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+/* Small tags under the buttons */
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.hero-tags li {
+  padding: 0.42rem 0.9rem;
+  border-radius: var(--radius-pill);
+
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  transition: border-color var(--speed-fast) ease, color var(--speed-fast) ease;
+}
+
+.hero-tags li:hover {
+  color: var(--neon-blue);
+  border-color: rgba(0, 179, 255, 0.5);
+}
+
+/* Scroll hint text (JS fades it out) */
+.scroll-hint {
+  position: relative;
+  z-index: 1;
+
+  margin: var(--space-6) auto 0;
+  text-align: center;
+
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+
+  transition: opacity var(--speed-med) ease;
+}
+
+.scroll-hint::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 34px;
+  margin: 0.6rem auto 0;
+  background: linear-gradient(to bottom, rgba(0, 179, 255, 0.9), transparent);
+}
+
+/* ============================================================
+   10. SECTION SCAFFOLDING
+   ============================================================ */
+
+.section-head {
+  max-width: 62ch;
+  margin: 0 auto var(--space-6);
+  text-align: center;
+}
+
+.section-title {
+  margin-bottom: var(--space-3);
+}
+
+.section-sub {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* ============================================================
+   11. ABOUT
+   ============================================================ */
+
+.about {
+  background: var(--white);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+.about-copy {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+}
+
+.about-copy p {
+  margin-bottom: 1.15rem;
+}
+
+.about-copy strong {
+  color: var(--navy);
+}
+
+/* Closing slogan line */
+.about-signature {
+  margin-top: var(--space-4);
+  padding-left: var(--space-4);
+  border-left: 3px solid var(--neon-blue);
+
+  font-style: italic;
+  color: var(--navy);
+}
+
+/* ----- Services card ----- */
+.about-services {
+  padding: var(--space-5);
+
+  background: var(--navy-deep);
+  color: var(--white);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-md);
+}
+
+.services-title {
+  color: var(--white);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--navy-line);
+}
+
+.services-list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.services-list li {
+  padding-bottom: 0.9rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+}
+
+.services-list li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.service-name {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--neon-blue);
+  margin-bottom: 0.2rem;
+}
+
+.service-desc {
+  display: block;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ============================================================
+   12. WORKS
+   ============================================================ */
+
+.works {
+  background: var(--off-white);
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+
+/* ----- Work card ----- */
+.work-card {
+  margin: 0;
+  overflow: hidden;
+
+  background: var(--white);
+  border: 1px solid rgba(11, 26, 58, 0.08);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform var(--speed-med) var(--ease-out),
+    box-shadow var(--speed-med) ease,
+    border-color var(--speed-med) ease;
+}
+
+.work-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 179, 255, 0.45);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Media frame — posters shown whole, not cropped */
+.work-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background:
+    linear-gradient(160deg, rgba(11, 26, 58, 0.06), rgba(0, 179, 255, 0.08));
+  overflow: hidden;
+}
+
+.work-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* show full poster */
+  padding: 0.75rem;
+  transition: transform var(--speed-slow) var(--ease-out);
+}
+
+.work-card:hover .work-img {
+  transform: scale(1.03);
+}
+
+/* Caption area */
+.work-caption {
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  border-top: 1px solid rgba(11, 26, 58, 0.07);
+}
+
+.work-title {
+  margin-bottom: 0.35rem;
+  font-size: 1.02rem;
+  letter-spacing: 1.2px;
+  color: var(--navy);
+}
+
+.work-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+/* Closing CTA line under the grid */
+.works-cta {
+  margin-top: var(--space-6);
+  text-align: center;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+
+.works-cta a {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--navy);
+  border-bottom: 2px solid var(--neon-blue);
+  padding-bottom: 1px;
+  transition: color var(--sp
